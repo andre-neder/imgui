@@ -30,26 +30,6 @@ add_library(imgui STATIC
 target_include_directories(imgui PUBLIC .)
 # target_link_libraries(imgui PUBLIC webgpu glfw)
 
-
-if(EMSCRIPTEN)
-
-else()
-  set(DAWN_FETCH_DEPENDENCIES ON)
-  set(DAWN_BUILD_SAMPLES OFF)
-  set(DAWN_BUILD_NODE_BINDINGS OFF)
-  set(TINT_BUILD_DOCS OFF)
-  set(TINT_BUILD_TESTS OFF)
-
-  add_subdirectory("third_party/dawn" EXCLUDE_FROM_ALL)
-
-  target_link_libraries(imgui PRIVATE
-      dawn::webgpu_dawn
-      glfw
-      webgpu_glfw
-  )
-  
-endif()
-
 target_compile_definitions(imgui PRIVATE
   IMGUI_IMPL_WEBGPU_BACKEND_DAWN
 )
